@@ -291,6 +291,19 @@ class _DropdownOverlayState<T> extends State<_DropdownOverlay<T>> {
     return Stack(
       children: [
 
+        Positioned(
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0,
+            child: GestureDetector(
+                onTap: () => setState(() {
+                  displayOverly = false;
+                }),
+                behavior: HitTestBehavior.translucent,
+                child: const IgnorePointer()
+            )),
+
         // Dropdown overlay
         Positioned(
           width: widget.size.width + 24,
@@ -350,19 +363,6 @@ class _DropdownOverlayState<T> extends State<_DropdownOverlay<T>> {
             ),
           ),
         ),
-
-        Positioned(
-            top: 0,
-            left: 0,
-            bottom: 0,
-            right: 0,
-            child: GestureDetector(
-              onTap: () => setState(() {
-                displayOverly = false;
-              }),
-              behavior: HitTestBehavior.translucent,
-              child: IgnorePointer()
-            ))
       ],
     );
   }

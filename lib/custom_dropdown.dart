@@ -185,6 +185,8 @@ class CustomDropdown<T> extends StatefulWidget {
 
   final _DropdownType _dropdownType;
 
+  final int minSearchLength;
+
   CustomDropdown({
     super.key,
     required this.items,
@@ -236,6 +238,7 @@ class CustomDropdown<T> extends StatefulWidget {
         searchHintText = null,
         initialItems = null,
         onListChanged = null,
+  minSearchLength = 1,
         listValidator = null,
         headerListBuilder = null,
         searchRequestLoadingIndicator = null,
@@ -247,6 +250,7 @@ class CustomDropdown<T> extends StatefulWidget {
     required this.items,
     required this.onChanged,
     this.controller,
+    this.minSearchLength = 1,
     this.itemsScrollController,
     this.initialItem,
     this.hintText,
@@ -303,6 +307,7 @@ class CustomDropdown<T> extends StatefulWidget {
     super.key,
     required this.futureRequest,
     required this.onChanged,
+    this.minSearchLength = 1,
     this.futureRequestDelay,
     this.initialItem,
     this.items,
@@ -396,6 +401,7 @@ class CustomDropdown<T> extends StatefulWidget {
         _dropdownType = _DropdownType.multipleSelect,
         initialItem = null,
         noResultFoundText = null,
+  minSearchLength = 1,
         validator = null,
         headerBuilder = null,
         onChanged = null,
@@ -412,6 +418,7 @@ class CustomDropdown<T> extends StatefulWidget {
     required this.items,
     required this.onListChanged,
     this.multiSelectController,
+    this.minSearchLength = 1,
     this.initialItems,
     this.controller,
     this.visibility,
@@ -473,6 +480,7 @@ class CustomDropdown<T> extends StatefulWidget {
     this.multiSelectController,
     this.futureRequestDelay,
     this.initialItems,
+    this.minSearchLength = 1,
     this.items,
     this.controller,
     this.itemsScrollController,
@@ -636,6 +644,7 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
               visibility: widget.visibility,
               overlay: (size, hideCallback) {
                 return _DropdownOverlay<T>(
+                  minSearchLength: widget.minSearchLength,
                   onItemSelect: (T value) {
                     switch (widget._dropdownType) {
                       case _DropdownType.singleSelect:

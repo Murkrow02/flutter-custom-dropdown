@@ -39,6 +39,7 @@ class _DropdownOverlay<T> extends StatefulWidget {
   final _NoResultFoundBuilder? noResultFoundBuilder;
   final CustomDropdownDecoration? decoration;
   final _DropdownType dropdownType;
+  final int minSearchLength;
 
   const _DropdownOverlay({
     Key? key,
@@ -77,6 +78,7 @@ class _DropdownOverlay<T> extends StatefulWidget {
     required this.headerListBuilder,
     required this.noResultFoundBuilder,
     required this.header,
+    required this.minSearchLength,
   });
 
   @override
@@ -375,6 +377,7 @@ class _DropdownOverlayState<T> extends State<_DropdownOverlay<T>> {
   //bool searched = false;
   Widget _buildSearchField() {
     return _SearchField<T>.forRequestData(
+      minSearchLength: widget.minSearchLength,
       items: widget.items,
       searchHintText:
       widget.searchHintText,

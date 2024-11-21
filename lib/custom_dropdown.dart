@@ -63,6 +63,11 @@ class CustomDropdown<T> extends StatefulWidget {
   /// Default to "Select value".
   final String? hintText;
 
+  /// Text that appears below the search bar and on top of the list of items.
+  ///
+  /// Default to null.
+  final Widget? header;
+
   /// Text that suggests what to search in the search field.
   ///
   /// Default to "Search".
@@ -207,6 +212,7 @@ class CustomDropdown<T> extends StatefulWidget {
     this.excludeSelected = true,
     this.enabled = true,
     this.disabledDecoration,
+    this.header
   })  : assert(
           initialItem == null || controller == null,
           'Only one of initialItem or controller can be specified at a time',
@@ -267,6 +273,7 @@ class CustomDropdown<T> extends StatefulWidget {
     this.enabled = true,
     this.disabledDecoration,
     this.closeDropDownOnClearFilterSearch = false,
+    this.header
   })  : assert(
           initialItem == null || controller == null,
           'Only one of initialItem or controller can be specified at a time',
@@ -326,6 +333,8 @@ class CustomDropdown<T> extends StatefulWidget {
     this.enabled = true,
     this.disabledDecoration,
     this.closeDropDownOnClearFilterSearch = false,
+    this.header
+
   })  : assert(
           initialItem == null || controller == null,
           'Only one of initialItem or controller can be specified at a time',
@@ -365,6 +374,8 @@ class CustomDropdown<T> extends StatefulWidget {
     this.listItemPadding,
     this.enabled = true,
     this.disabledDecoration,
+    this.header
+
   })  : assert(
           initialItems == null || multiSelectController == null,
           'Only one of initialItems or controller can be specified at a time',
@@ -426,6 +437,7 @@ class CustomDropdown<T> extends StatefulWidget {
     this.listItemPadding,
     this.enabled = true,
     this.disabledDecoration,
+    this.header,
     this.closeDropDownOnClearFilterSearch = false,
   })  : assert(
           initialItems == null || multiSelectController == null,
@@ -487,6 +499,7 @@ class CustomDropdown<T> extends StatefulWidget {
     this.hideSelectedFieldWhenExpanded = false,
     this.enabled = true,
     this.disabledDecoration,
+    this.header,
     this.closeDropDownOnClearFilterSearch = false,
   })  : assert(
           initialItems == null || multiSelectController == null,
@@ -673,6 +686,7 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
                   searchRequestLoadingIndicator:
                       widget.searchRequestLoadingIndicator,
                   dropdownType: widget._dropdownType,
+                  header: widget.header,
                 );
               },
               child: (showCallback) {

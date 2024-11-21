@@ -14,6 +14,7 @@ EdgeInsets.symmetric(vertical: 12, horizontal: 16);
 
 class _DropdownOverlay<T> extends StatefulWidget {
   final List<T> items;
+  final Widget? header;
   final ScrollController? itemsScrollCtrl;
   final SingleSelectController<T?> selectedItemNotifier;
   final MultiSelectController<T> selectedItemsNotifier;
@@ -75,6 +76,7 @@ class _DropdownOverlay<T> extends StatefulWidget {
     required this.listItemBuilder,
     required this.headerListBuilder,
     required this.noResultFoundBuilder,
+    required this.header,
   });
 
   @override
@@ -339,20 +341,23 @@ class _DropdownOverlayState<T> extends State<_DropdownOverlay<T>> {
                   axisAlignment: displayOverlayBottom ? 1.0 : -1.0,
                   child: SizedBox(
                     key: key2,
-                    height: items.length > 4
-                        ? widget.overlayHeight ?? 240
-                        : null,
+                    // height: items.length > 4
+                    //     ? widget.overlayHeight ?? 260x
+                    //     : null,
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         // Search field
                         if (widget.searchType != null)
                           Container(
-                            padding: EdgeInsets.only(top: 5),
-                            height: 40,
+                            padding: const EdgeInsets.only(top: 10),
+                            height: 50,
                             child: _buildSearchField(),
                           ),
+                        if (widget.header != null)// && !searched)
+                          widget.header!,
                         SizedBox(
-                          height: 190,
+                          height: 180,
                           child: list,
                         ),
                       ],
@@ -367,7 +372,7 @@ class _DropdownOverlayState<T> extends State<_DropdownOverlay<T>> {
     );
   }
 
-
+  //bool searched = false;
   Widget _buildSearchField() {
     return _SearchField<T>.forRequestData(
       items: widget.items,
@@ -383,7 +388,10 @@ class _DropdownOverlayState<T> extends State<_DropdownOverlay<T>> {
       futureRequestDelay:
       widget.futureRequestDelay,
       onSearchedItems: (val) {
-        setState(() => items = val);
+        setState(() {
+         // searched = true;
+          items = val;
+        });
       },
       mayFoundResult: (val) =>
       mayFoundSearchRequestResult =
